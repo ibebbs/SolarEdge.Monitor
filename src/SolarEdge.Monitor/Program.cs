@@ -15,10 +15,9 @@ namespace SolarEdge.Monitor
             var builder = new HostBuilder()
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    config.AddEnvironmentVariables();
+                    config.AddEnvironmentVariables("SolarEdge:Monitor:");
                     if (args != null)
                     {
-                        config.AddEnvironmentVariables("ReadInverter:");
                         config.AddCommandLine(args);
                     }
                 })
