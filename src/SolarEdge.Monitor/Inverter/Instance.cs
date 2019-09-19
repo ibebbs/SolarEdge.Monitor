@@ -1,4 +1,5 @@
 ﻿using EasyModbus;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,16 +17,18 @@ namespace SolarEdge.Monitor.Inverter
 
         private readonly string _address;
         private readonly int _port;
+        private readonly ILogger<Instance> _logger;
 
         private ModbusClient _modbusClient;
 
         public event ConnectionEvent Connected;
         public event ConnectionEvent Disconnected;
 
-        public Instance(string address, int port)
+        public Instance(string address, int port, ILogger<Instance> logger)
         {
             _address = address;
             _port = port;
+            _logger = logger;
         }
 
         private void ConnectionChanged(object sender)
@@ -42,8 +45,11 @@ namespace SolarEdge.Monitor.Inverter
 
         public async Task<bool> ConnectAsync()
         {
+            _logger.LogInformation($"Connecting to inverter at {_address}:{_port}");
+
             if (_modbusClient != null)
             {
+                _logger.LogError($"Already connected");
                 throw new InvalidOperationException("Already connected");
             }
 
@@ -95,7 +101,9 @@ namespace SolarEdge.Monitor.Inverter
                 throw new InvalidOperationException("Not yet connected. Call ConnectAsync first.");
             }
 
+            _logger.LogInformation($"Reading '{typeof(T).Name}' from inverter at {_address}:{_port}");
             var result = _modbusClient.Read<T>();
+            _logger.LogInformation($"Reading of '{typeof(T).Name}' successful");
 
             return Task.FromResult(result);
         }
