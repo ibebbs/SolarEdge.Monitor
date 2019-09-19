@@ -103,6 +103,8 @@ namespace SolarEdge.Monitor.Service.State
 
         private Task<IEnumerable<IDataExtract>> ReadExtractors()
         {
+            _logger.LogInformation("Polling inverter");
+
             return _extractors
                 .SelectAsync(extractor => extractor.Read(_inverter))
                 .Memoize();
