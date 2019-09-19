@@ -35,8 +35,10 @@ namespace SolarEdge.Monitor.Message
 
         public async Task ConnectAsync()
         {
+            _logger.LogInformation($"Connecting to MQTT broker at '{_config.Value.Address}:{_config.Value.Port}'");
             _client = await MqttClient.CreateAsync(_config.Value.Address, new MqttConfiguration { Port = _config.Value.Port });
             _session = await _client.ConnectAsync(new MqttClientCredentials(clientId: _config.Value.ClientId));
+            _logger.LogInformation($"Successfully connected to MQTT broker at '{_config.Value.Address}:{_config.Value.Port}'");
         }
 
         private string GetTopic(IReadOnlyDictionary<string, string> properties)
