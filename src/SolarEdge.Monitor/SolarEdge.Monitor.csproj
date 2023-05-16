@@ -25,10 +25,10 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="7.0.0" />
     <PackageReference Include="morelinq" Version="3.4.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Net.Mqtt" Version="0.6.16-beta" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
-    <PackageReference Include="System.ServiceProcess.ServiceController" Version="4.5.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
