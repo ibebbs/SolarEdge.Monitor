@@ -84,10 +84,16 @@ namespace SolarEdge.Monitor.Service.State
             _transitionFactory = transitionFactory;
             _scheduler = TaskPoolScheduler.Default;
 
-            _extractors = config.Value.ModelsToRead
+            var extractors = config.Value.ModelsToRead
                 .Split(',')
-                .Join(ModelToExtractorMappings, name => name.ToLower(), mapping => mapping.Key.ToLower(), (name, mapping) => mapping.Value())
+                .Join(ModelToExtractorMappings, name => name.ToLower(), mapping => mapping.Key.ToLower(), (name, mapping) => new { Name = name, Value = mapping.Value() })
                 .ToArray();
+
+            var models = string.Join(", ", extractors.Select(tuple => tuple.Name));
+
+            _logger.LogInformation($"Connected state will read the following models: {models}");
+
+            _extractors = extractors.Select(tuple => tuple.Value).ToArray();
         }
 
         private IObservable<ITransition> DisconnectionEventTransition()
@@ -103,6 +109,8 @@ namespace SolarEdge.Monitor.Service.State
 
         private Task<IEnumerable<IDataExtract>> ReadExtractors()
         {
+            _logger.LogInformation("Polling inverter");
+
             return _extractors
                 .SelectAsync(extractor => extractor.Read(_inverter))
                 .Memoize();

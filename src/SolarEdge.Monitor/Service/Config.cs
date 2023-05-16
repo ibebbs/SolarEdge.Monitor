@@ -5,7 +5,7 @@ namespace SolarEdge.Monitor.Service
 {
     public class Config
     {
-        public uint PollingIntervalSeconds { get; set; } = 5;
+        public uint PollingIntervalSeconds { get; set; } = 10;
 
         [Required]
         public string ModelsToRead { get; set; } = "inverter";
