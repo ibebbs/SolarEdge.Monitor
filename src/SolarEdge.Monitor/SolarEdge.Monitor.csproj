@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   
@@ -26,8 +26,8 @@
     <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="2.2.0" />
     <PackageReference Include="morelinq" Version="3.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="System.Net.Mqtt" Version="0.5.42-beta" />
-    <PackageReference Include="System.Reactive" Version="3.0.0" />
+    <PackageReference Include="System.Net.Mqtt" Version="0.6.16-beta" />
+    <PackageReference Include="System.Reactive" Version="5.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="4.5.0" />
   </ItemGroup>
 

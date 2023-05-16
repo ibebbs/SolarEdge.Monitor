@@ -35,8 +35,8 @@ namespace SolarEdge.Monitor.Message
 
         public async Task ConnectAsync()
         {
-            _client = await MqttClient.CreateAsync(_config.Value.Address, new MqttConfiguration { Port = _config.Value.Port });
-            _session = await _client.ConnectAsync(new MqttClientCredentials(clientId: _config.Value.ClientId));
+            _client = await MqttClient.CreateAsync(_config.Value.Address, new MqttConfiguration { Port = _config.Value.Port, KeepAliveSecs = 1 });
+            _session = await _client.ConnectAsync(new MqttClientCredentials(clientId: _config.Value.ClientId), cleanSession: true);
         }
 
         private string GetTopic(IReadOnlyDictionary<string, string> properties)
