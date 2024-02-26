@@ -14,5 +14,7 @@ namespace SolarEdge.Monitor.Message
         public string ClientId { get; set; } = "InverterMonitor";
 
         public string TopicPattern { get; set; } = "home/solar/{type}";
+
+        public ushort KeepAliveSecs { get; set; } = 30;
     }
 }
