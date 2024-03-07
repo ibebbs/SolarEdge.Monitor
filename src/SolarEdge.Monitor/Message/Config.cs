@@ -15,6 +15,6 @@ namespace SolarEdge.Monitor.Message
 
         public string TopicPattern { get; set; } = "home/solar/{type}";
 
-        public ushort KeepAliveSecs { get; set; } = 30;
+        public ushort KeepAliveSecs { get; set; } = 5;
     }
 }
