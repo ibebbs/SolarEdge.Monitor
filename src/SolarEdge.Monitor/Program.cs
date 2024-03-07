@@ -45,6 +45,7 @@ namespace SolarEdge.Monitor
                     .UseConsoleLifetime()
                     .Build()
                     .ValidateConfiguration<Inverter.Config, Message.Config, Service.Config>()
+                    .PrintConfiguration<Inverter.Config, Message.Config, Service.Config>()
                     .RunAsync();
             }
             catch (ConfigurationValidationException e)
